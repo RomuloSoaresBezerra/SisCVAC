@@ -1,2 +1,2 @@
 # SisGAF
-Sistema de Gerenciamento de Academia Fitness
+Sistema de Gerenciamento de Academia Fitness.
