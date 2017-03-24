@@ -1,0 +1,193 @@
+CREATE TABLE Aluno(
+	Codigo INT,
+	Nome VARCHAR(50) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	Idade INT NOT NULL,
+	Peso REAL NOT NULL,
+	Altura REAL NOT NULL,
+	BF REAL NOT NULL,
+	IMC REAL NOT NULL,
+	Telefone VARCHAR(20),
+	EstadoSaude VARCHAR(50) NOT NULL,
+	Objetivo VARCHAR(100) NOT NULL,
+	CONSTRAINT  AlunoPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE Matricula(
+	Codigo INT,
+	DataAbertura DATE NOT NULL,
+	DataTrancamento DATE,
+	CodigoAluno INT NOT NULL UNIQUE,
+	CONSTRAINT  MatriculaPK PRIMARY KEY (Codigo),
+	CONSTRAINT MatriculaFK FOREIGN KEY (CodigoAluno) 
+		REFERENCES Aluno(Codigo)
+);
+
+CREATE TABLE Mensalidade(
+	Codigo INT,
+	CodigoAluno INT NOT NULL UNIQUE,
+	Valor REAL NOT NULL,
+	DataRecibo DATE,
+	DataPagamento DATE,
+	CONSTRAINT MensalidadePK PRIMARY KEY (Codigo),
+	CONSTRAINT MensalidadeFK FOREIGN KEY (CodigoAluno)
+		REFERENCES Aluno(Codigo)	
+);
+
+CREATE TABLE Treino(
+	Codigo INT,
+	Tipo VARCHAR(10) NOT NULL,
+	DescansoEntreSeries INT NOT NULL,
+	UsoDeCarga VARCHAR(10) NOT NULL,
+	DescansoEntreRepetiçoes INT NOT NULL,
+	DescansoEntreCiclo INT NOT NULL,
+	Descriçao VARCHAR(200),
+	CONSTRAINT Treino PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE Aluno_Tem_Treino(
+	CodigoAluno INT,
+	CodigoTreino INT,
+	Duraçao TIME NOT NULL,
+	DataInicio DATE NOT NULL,
+	CONSTRAINT Aluno_Tem_TreinoPK PRIMARY KEY (CodigoAluno, CodigoTreino)
+);
+
+CREATE TABLE Exercicio(
+	Codigo INT,
+	Tipo VARCHAR(10) NOT NULL,
+	Series INT NOT NULL,
+	Repetiçoes INT NOT NULL,
+	Nome VARCHAR(100) NOT NULL,
+	Musculo VARCHAR(20) NOT NULL,
+	Drop Set BOOLEAN NOT NULL,
+	CONSTRAINT ExercicioPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE Treino_Tem_Exercicio(
+	CodigoTreino INT,
+	CodigoExercicio INT,
+	CONSTRAINT Treino_Tem_Exercicio PRIMARY KEY (CodigoTreino, CodigoExercicio)
+);
+
+CREATE TABLE Professor(
+	Codigo INT,
+	Nome VARCHAR(100) NOT NULL,
+	CPF VARCHAR(13) NOT NULL UNIQUE,
+	Sexo CHAR(1) NOT NULL,
+	MesSalario VARCHAR(10) NOT NULL,
+	Salario REAL NOT NULL,
+	CONSTRAINT ProfessorPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE EspecialidadePROFESSOR(
+	CodigoProfessor INT,
+	Especialidade VARCHAR(30),
+	CONSTRAINT EspecialidadePROFESSOR PRIMARY KEY (CodigoProfessor, Especialidade)
+); 
+
+CREATE TABLE PROFESSOR_MontaESupervisiona_TREINO_EXERCICIO(
+	CodigoProfessor INT,
+	CodigoTreino INT,
+	CodigoExercicio INT,
+	CONSTRAINT PROFESSOR_MontaESupervisiona_TREINO_EXERCICIOPK PRIMARY KEY (CodigoProfessor, CodigoTreino, CodigoExercicio)
+);
+
+CREATE TABLE GERENTE(
+	Codigo INT,
+	Nome VARCHAR(100) NOT NULL,
+	CPF VARCHAR(13) NOT NULL UNIQUE,
+	Sexo VARCHAR(10) NOT NULL,
+	MesSalario VARCHAR(10) NOT NULL,
+	LucroMensal REAL NOT NULL,
+	CONSTRAINT GerentePK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE DESPESA(
+	Codigo INT,
+	Valor REAL NOT NULL,
+	Descriçao VARCHAR(100) NOT NULL,
+	CONSTRAINT DespesaPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE GERENTE_Gerencia_DESPESA(
+	CodigoGerente INT,
+	CodigoDespesa INT,
+	Data DATE NOT NULL,
+	CONSTRAINT GERENTE_Gerencia_DESPESAPK PRIMARY KEY (CodigoGerente, CodigoDespesa)
+);
+
+CREATE TABLE COMPRA(
+	Codigo INT,
+	CodigoAluno INT,
+	CNPJ/CPF VARCHAR(14) NOT NULL UNIQUE,
+	Descriçao VARCHAR(100) NOT NULL,
+	Valor REAL NOT NULL,
+	Data DATE NOT NULL,
+	CONSTRAINT COMPRAPK PRIMARY KEY (Codigo),
+	CONSTRAINT COMPRAFK FOREIGN KEY (CodigoAluno)
+		REFERENCES Aluno (Codigo)
+);
+
+CREATE TABLE COMPRAaPRAZO(
+	Codigo INT,
+	ValorParcela REAL NOT NULL,
+	Quitada BOOLEAN NOT NULL,
+	Parcelas INT NOT NULL,
+	CONSTRAINT COMPRAaPRAZOPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE COMPRAaVISTA(
+	Codigo INT,
+	Desconto REAL NOT NULL,
+	CONSTRAINT COMPRAaVISTAPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE GERENTE_Realiza_COMPRA(
+	CodigoGerente INT,
+	CodigoCompra INT,
+	Data DATE NOT NULL,
+	CONSTRAINT GERENTE_Realiza_COMPRAPK PRIMARY KEY (CodigoGerente, CodigoCompra)
+);
+
+CREATE TABLE PRODUTO(
+	Codigo INT,
+	Preço REAL NOT NULL,
+	Nome VARCHAR(50) NOT NULL,
+	Marca VARCHAR(20) NOT NULL,
+	Quantidade INT NOT NULL,
+	CONSTRAINT PRODUTOPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE COMPRA_Contem_PRODUTO(
+	CodigoCompra INT,
+	CodigoProduto INT,
+	CONSTRAINT COMPRA_Contem_PRODUTOPK PRIMARYKEY (CodigoCompra, CodigoProduto)
+);
+
+CREATE TABLE MEDIDAS(
+	Codigo INT,
+	Abdome REAL NOT NULL,
+	CoxaDireita REAL NOT NULL,
+	CoxaEsquerda REAL NOT NULL,
+	BraçoDireito REAL NOT NULL,
+	BraçoEsquerdo REAL NOT NULL,
+	Peitoral REAL NOT NULL,
+	AntebraçoDireito REAL NOT NULL,
+	AntebraçoEsquerdo REAL NOT NULL,
+	Deltoides REAL NOT NULL,
+	PanturrilhaDireita REAL NOT NULL,
+	PanturrilhaEsquerda REAL NOT NULL,
+	CONSTRAINT MEDIDASPK PRIMARY KEY (Codigo)
+);
+
+CREATE TABLE PROFESSOR_Tira_MEDIDAS_ALUNO(
+	CodigoProfessor INT,
+	CodigoAluno INT,
+	CodigoMedidas INT,
+	Mês DATE NOT NULL,
+	CONSTRAINT PROFESSOR_Tira_MEDIDAS_ALUNOPK PRIMARY KEY (CodigoProfessor, CodigoAluno, CodigoMedidas)
+);
+
+
+
