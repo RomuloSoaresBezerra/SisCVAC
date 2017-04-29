@@ -162,7 +162,7 @@ CREATE TABLE NEGOCIACAO(
 	CNPJouCPF VARCHAR(20) NOT NULL,
 	Descricao VARCHAR(100) NOT NULL,
 	Valor REAL NOT NULL,
-	Data DATE NOT NULL,
+	Data DATE,
         Tipo VARCHAR(6) NOT NULL,
 	CONSTRAINT NegociacaoPK PRIMARY KEY (Codigo),
 	CONSTRAINT NegociacaoFK FOREIGN KEY (CodigoAluno)
@@ -481,15 +481,15 @@ VALUES(77711, 88812);
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
 VALUES(99999, 11111, '666.666.666-06', 'Hipertróficos', 900, '01/03/2017', 'Venda');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99913, null, '11.111.111/1111-11', 'Pastas Proteicas', 95.04, '17/03/2017', 'Compra');
+VALUES(99913, null, '11.111.111/1111-11', 'Pastas Proteicas', 95.04, null, 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99914, null, '11.111.111/1111-11', 'Hipertróficos', 1800, '17/03/2017', 'Compra');
+VALUES(99914, null, '11.111.111/1111-11', 'Hipertróficos', 1800, null, 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99915, null, '22.222.222/2222-22', 'Barras Cereais', 590, '02/03/2017', 'Compra');
+VALUES(99915, null, '22.222.222/2222-22', 'Barras Cereais', 590, null, 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99916, null, '33.333.333/3333-33', 'Energéticos', 1500, '05/03/2017', 'Compra');
+VALUES(99916, null, '33.333.333/3333-33', 'Energéticos', 1500, null, 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99917, null, '44.444.444/4444-44', 'Termogênicos', 3000, '08/03/2017', 'Compra');
+VALUES(99917, null, '44.444.444/4444-44', 'Termogênicos', 3000, null, 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
 VALUES(99918, 11111, '666.666.666-06', 'Termogênicos', 300, '01/03/2017', 'Venda');
 

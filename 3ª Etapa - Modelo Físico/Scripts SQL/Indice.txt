@@ -1,7 +1,8 @@
 CREATE INDEX AlunoIndice ON ALUNO(Codigo);
 CREATE INDEX MatriculaIndice ON MATRICULA(Codigo);
 CREATE INDEX ProdutoIndice ON PRODUTO(Codigo);
-CREATE INDEX CompraIndice ON COMPRA(Codigo);
+CREATE INDEX NegociacaoIndice ON NEGOCIACAO(Codigo);
+CREATE INDEX PagamentoIndice ON PAGAMENTO(Codigo);
 CREATE INDEX MensalidadeIndice ON MENSALIDADE(Codigo);
 CREATE INDEX TreinoIndice ON TREINO(Codigo);
 CREATE INDEX ExercicioIndice ON EXERCICIO(Codigo);
