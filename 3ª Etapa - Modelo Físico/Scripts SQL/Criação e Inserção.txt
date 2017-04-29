@@ -345,7 +345,7 @@ VALUES(55519, 'E', 3, 12, 'Rosca Pronada', 'Bíceps, Tríceps e Antebraços', false
 INSERT INTO EXERCICIO(Codigo, Tipo, Series, Repeticoes, Nome, Musculo, DropSet) 
 VALUES(55520, 'F', 3, 12, 'Supra Abdominal', 'Peitoral, Ombros', true);
 INSERT INTO EXERCICIO(Codigo, Tipo, Series, Repeticoes, Nome, Musculo, DropSet) 
-VALUES(55521, 'F', 3, 12, 'Infra Abdominal', 'Dorsais, Bíceps, Tríceps e Antebraços', false);
+VALUES(55521, 'F', 3, 12, 'Infra Abdominal', 'Abdome', false);
 INSERT INTO EXERCICIO(Codigo, Tipo, Series, Repeticoes, Nome, Musculo, DropSet) 
 VALUES(55522, 'F', 3, 12, 'Elevações de Pernas Tipo Burro', 'Pernas', false);
 
