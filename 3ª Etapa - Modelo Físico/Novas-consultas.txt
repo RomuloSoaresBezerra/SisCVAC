@@ -1,0 +1,38 @@
+16. 
+SELECT A.Nome
+FROM ALUNO A, MENSALIDADE M
+WHERE A.Codigo = M.CodigoAluno AND M.DataPagamento IS NULL 
+
+17. 
+SELECT A.Nome
+FROM ALUNO A
+WHERE A.Nome LIKE 'J%' OR A.Nome LIKE 'R%'
+
+18.
+SELECT P.Nome
+FROM PROFESSOR P
+WHERE P.Nome LIKE 'Andr%' AND P.Sexo = 'F' AND P.Salario > 1000 
+
+19.
+SELECT A.Nome
+FROM ALUNO A
+WHERE EXISTS 
+(SELECT * FROM NEGOCIACAO N
+WHERE A.Codigo = N.CodigoAluno AND N.Tipo = 'Compra' AND NOT EXISTS
+(SELECT * FROM PAGAMENTO P
+WHERE N.Codigo = P.CodigoNegociacao AND P.Quitada = true))
+
+20.
+SELECT G.Nome
+FROM GERENTE G, GERENTE_Realiza_NEGOCIACAO GRN
+WHERE EXISTS 
+(SELECT * FROM NEGOCIACAO N 
+WHERE G.Codigo = GRN.CodigoGerente AND N.Codigo = GRN.CodigoNegociacao AND N.Tipo = 'Compra' AND NOT EXISTS
+(SELECT * FROM PAGAMENTO P
+WHERE GRN.CodigoNegociacao = P.CodigoNegociacao AND P.Quitada = true)) 
+
+21. 
+SELECT COUNT(*) AS QuantidadeAlunosSexoMasculino 
+FROM ALUNO A
+WHERE A.Sexo = 'M'
+GROUP BY A.Sexo

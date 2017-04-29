@@ -158,8 +158,8 @@ CREATE TABLE GERENTE_Gerencia_DESPESA(
 
 CREATE TABLE NEGOCIACAO(
 	Codigo INT,
-	CodigoAluno INT NOT NULL,
-	CNPJouCPF VARCHAR(20) NOT NULL UNIQUE,
+	CodigoAluno INT,
+	CNPJouCPF VARCHAR(20) NOT NULL,
 	Descricao VARCHAR(100) NOT NULL,
 	Valor REAL NOT NULL,
 	Data DATE NOT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE PAGAMENTO(
 		REFERENCES NEGOCIACAO(Codigo)
 	ON UPDATE CASCADE ON DELETE RESTRICT,
         CHECK(ValorParcela>0),
-        CHECK(Parcelas>0 AND Parcelas<=5)  
+        CHECK(Parcelas>0 AND Parcelas<=10)  
 );
 
 CREATE TABLE GERENTE_Realiza_NEGOCIACAO(
@@ -479,69 +479,77 @@ INSERT INTO GERENTE_Gerencia_DESPESA(CodigoGerente, CodigoDespesa)
 VALUES(77711, 88812);
 
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99999, 11111, '666.666.666-06', 'Produto Emagrecedor', 200, '01/03/2017', 'Compra');
+VALUES(99999, 11111, '666.666.666-06', 'Hipertróficos', 900, '01/03/2017', 'Venda');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99910, 11112, '777.777.777-07', 'Produto Emagrecedor', 300, '02/03/2017', 'Compra');
+VALUES(99913, null, '11.111.111/1111-11', 'Pastas Proteicas', 95.04, '17/03/2017', 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99911, 11113, '888.888.888-08', 'Produto Energético', 150, '05/03/2017', 'Compra');
+VALUES(99914, null, '11.111.111/1111-11', 'Hipertróficos', 1800, '17/03/2017', 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99912, 11114, '999.999.999-09', 'Produto Termogênico', 180, '08/03/2017', 'Compra');
+VALUES(99915, null, '22.222.222/2222-22', 'Barras Cereais', 590, '02/03/2017', 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99913, 11115, '101.101.101-10', 'Produto Proteico', 450, '17/03/2017', 'Compra');
+VALUES(99916, null, '33.333.333/3333-33', 'Energéticos', 1500, '05/03/2017', 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99914, 11115, '11.111.111/1111-11', 'Produto Proteico', 450, '17/03/2017', 'Venda');
+VALUES(99917, null, '44.444.444/4444-44', 'Termogênicos', 3000, '08/03/2017', 'Compra');
 INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99915, 11112, '22.222.222/2222-22', 'Produto Emagrecedor', 300, '02/03/2017', 'Venda');
-INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99916, 11113, '33.333.333/3333-33', 'Produto Energético', 150, '05/03/2017', 'Venda');
-INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99917, 11114, '44.444.444/4444-44', 'Produto Termogênico', 180, '08/03/2017', 'Venda');
-INSERT INTO NEGOCIACAO(Codigo, CodigoAluno, CNPJouCPF, Descricao, Valor, Data, Tipo) 
-VALUES(99918, 11111, '55.555.555/5555-55', 'Produto Emagrecedor', 200, '01/03/2017', 'Venda');
+VALUES(99918, 11111, '666.666.666-06', 'Termogênicos', 300, '01/03/2017', 'Venda');
 
 INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
-VALUES(54321, 99999, 50, false, 4, 0);
+VALUES(54321, 99999, 100, false, 9, 0);
 INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
-VALUES(98765, 99910, 45, false, 4, 0);
+VALUES(98765, 99918, 50, false, 6, 0);
 INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
-VALUES(15192, 99911, 90, false, 5, 0);
+VALUES(15192, 99917, 600, false, 5, 0);
 INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
-VALUES(87932, 99912, 400, false, 5, 0);
+VALUES(87932, 99916, 500, false, 3, 0);
 INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
-VALUES(97621, 99913, 375, false, 4, 0);
+VALUES(97621, 99915, 295, false, 2, 0);
+INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
+VALUES(97622, 99914, 360, false, 5, 0);
+INSERT INTO PAGAMENTO(Codigo, CodigoNegociacao, ValorParcela, Quitada, Parcelas, Desconto) 
+VALUES(97623, 99913, 95.04, true, 1, 10.56);
 
 INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
-VALUES(77777, 99914, '17/03/2017');
-INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
-VALUES(77778, 99915, '02/03/2017');
+VALUES(77778, 99914, '02/03/2017');
 INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
 VALUES(77779, 99916, '05/03/2017');
 INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
 VALUES(77710, 99917, '08/03/2017');
 INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
-VALUES(77711, 99918, '01/03/2017');
+VALUES(77711, 99915, '01/03/2017');
+INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
+VALUES(77711, 99914, '01/03/2017');
+INSERT INTO GERENTE_Realiza_NEGOCIACAO(CodigoGerente, CodigoNegociacao, Data) 
+VALUES(77779, 99913, '01/03/2017');
 
 INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
-VALUES(10101, 450, 'Whey Protein', 'Optimum Nutrition', 1);
+VALUES(10101, 450, 'Whey Protein', 'Optimum Nutrition', 2);
 INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
-VALUES(20202, 300, 'BCAA Recovery', 'Atlhetica Nutrition', 1);
+VALUES(20202, 300, 'Fat Destroyer', 'Atlhetica Nutrition', 1);
 INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
-VALUES(30303, 200, 'Cactinea', 'Nutreo', 1);
+VALUES(30303, 150, 'Fat Destroyer', 'Atlhetica Nutrition', 15);
 INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
-VALUES(40404, 150, 'Turbo Force', 'Uni Flora', 1);
+VALUES(40404, 150, 'Turbo Force', 'Uni Flora', 10);
 INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
-VALUES(50505, 180, 'Ultimate Fire Black', 'Max Titanium', 1);
+VALUES(50505, 118, 'Bar Ultimate Fire Black', 'Max Titanium', 5);
+INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
+VALUES(60606, 300, 'Whey Protein', 'Max Titanium', 6);
+INSERT INTO PRODUTO(Codigo, Preco, Nome, Marca, Quantidade) 
+VALUES(70707, 8.80, 'Pasta Amendoin 33g proteina', 'Body Action', 12);
 
 INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
 VALUES(99999, 10101);
 INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
-VALUES(99910, 20202);
+VALUES(99918, 20202);
 INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
-VALUES(99911, 30303);
+VALUES(99917, 30303);
 INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
-VALUES(99912, 40404);
+VALUES(99916, 40404);
 INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
-VALUES(99913, 50505);
+VALUES(99915, 50505);
+INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
+VALUES(99914, 60606);
+INSERT INTO NEGOCIACAO_Contem_PRODUTO(CodigoNegociacao, CodigoProduto) 
+VALUES(99913, 70707);
 
 INSERT INTO MEDIDAS(Codigo, Abdome, CoxaDireita, CoxaEsquerda, BracoDireito, BracoEsquerdo, Peitoral, AntebracoDireito, AntebracoEsquerdo, Deltoides, PanturrilhaEsquerda, PanturrilhaDireita) 
 VALUES(12345, 90, 54, 53, 36, 38, 100, 25, 26, 50, 40, 38);

@@ -1,20 +1,21 @@
 01- 
-SELECT A.Nome, C.CodigoAluno, C.Codigo, C.Descriçao, C.Valor, C.Data
-FROM Compra C, Aluno A 
-WHERE A.Codigo = C.CodigoAluno AND 
-A.Nome = 'Pedro da Silva'
+SELECT A.Nome, N.CodigoAluno, N.Codigo, N.Descricao, N.Valor, N.Data
+FROM Negociacao N, Aluno A 
+WHERE A.Codigo = N.CodigoAluno AND 
+A.Nome = 'João de Sousa'
 
 02- 
-SELECT G.Nome, G.Sexo, C.Descriçao, C.Valor, GRC.CodigoGerente, GRC.CodigoCompra, GRC.Data
-FROM Gerente_Realiza_Compra GRC, Compra C, Gerente G
-Where G.Codigo = GRC.CodigoGerente AND 
-C.Codigo = GRC.CodigoCompra
+SELECT GRN.CodigoGerente, G.Nome, G.Sexo, GRN.CodigoNegociacao, N.Descricao, N.Valor, GRN.Data
+FROM Gerente_Realiza_Negociacao GRN, Negociacao N, Gerente G
+Where G.Codigo = GRN.CodigoGerente AND 
+N.Codigo = GRN.CodigoNegociacao
+ORDER BY G.Sexo, G.Nome
 
 03- 
-SELECT co.CodigoAluno, al.Nome, co.Codigo AS CodigoCompra, co.Descriçao, co.Valor, co.Data
-FROM ALUNO al, COMPRA co JOIN COMPRAaPRAZO cp ON co.Codigo = cp.Codigo AND cp.Quitada = false
-WHERE al.Codigo = co.CodigoAluno AND 
-al.Nome = 'João de Sousa'
+SELECT N.CodigoAluno, A.Nome, N.Codigo AS CodigoNegociacao, N.Descricao, N.Valor, N.Data
+FROM ALUNO A, Negociacao N JOIN Pagamento P ON N.Codigo = P.CodigoNegociacao AND P.Quitada = false
+WHERE A.Codigo = N.CodigoAluno AND 
+A.Nome = 'João de Sousa'
 
 04- 
 SELECT ge.Codigo AS Gerente, ge.Nome, ge.Sexo, co.Codigo AS CodigoCompra, co.Descriçao, co.Valor, gerc.Data
