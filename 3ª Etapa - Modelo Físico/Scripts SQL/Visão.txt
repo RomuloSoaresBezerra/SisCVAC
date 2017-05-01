@@ -1,5 +1,4 @@
-1- O código,nome, sexo, idade, telefone e data de trancamento dos alunos que estão ativos na academia no momento da consulta do sistema.
-
+1-
 CREATE VIEW AlunosAtivos AS
 SELECT A.Codigo, A.Nome, A.Sexo, A.Idade, A.Telefone, M.DataTrancamento
 FROM ALUNO A, MATRICULA M
@@ -8,8 +7,7 @@ M.DataTrancamento IS NULL OR
 M.DataTrancamento > (SELECT CURRENT_DATE)
 ORDER BY A.Nome
 
-2- O CPF, nome e sexo de todos os professores ordenados por sexo da academia
-
+2-
 CREATE VIEW ProfessoresDaAcademia AS
 SELECT CPF, Nome, Sexo
 FROM PROFESSOR 
